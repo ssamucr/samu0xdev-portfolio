@@ -1,9 +1,49 @@
 @import "tailwindcss";
 
+/*
+  @theme registra los tokens en el sistema de Tailwind v4.
+  Esto genera utilidades como: bg-bg, text-accent, font-display, shadow-glow, etc.
+  Una sola fuente de verdad — no usar tailwind.config.cjs para colores.
+*/
+@theme {
+  /* --- Colores --- */
+  --color-bg:             #0E0E0E;
+  --color-text-primary:   #E7E5E4;
+  --color-text-secondary: #ACABAA;
+  --color-text-tertiary:  rgba(72, 72, 72, 0.4);
+  --color-accent:         #C0C1FF;
+  --color-accent-deep:    #2F2EBE;
+
+  /* --- Tipografia --- */
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body:    "Inter", sans-serif;
+
+  /* --- Espaciado --- */
+  --spacing-section: 6rem;
+
+  /* --- Sombras --- */
+  /* RGB de --color-accent (#C0C1FF) usado para el glow */
+  --shadow-glow: 0 0 40px rgba(192, 193, 255, 0.06);
+}
+
+/* Scroll suave + espacio para el navbar fijo (seccion 8 de la arquitectura) */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
 html, body {
-	height: 100%;
-	margin: 0;
-	padding: 0;
-    background-color: #0E0E0E;
-    color: #E7E5E4;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+}
+
+/* Accesibilidad: desactivar animaciones si el usuario lo prefiere */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
