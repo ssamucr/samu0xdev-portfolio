@@ -41,9 +41,13 @@ const {
         <ClientRouter />
 	</head>
 	<body>
-		<NavBar />
-		<SocialDock />
-		<main>
+		<header class="fixed top-6 left-0 right-0 z-50">
+			<div class="w-full max-w-7xl mx-auto px-6 flex items-center justify-between">
+				<NavBar />
+				<SocialDock />
+			</div>
+        </header>
+		<main class="max-w-7xl mx-auto px-6">
             <slot />
         </main>
 		<Footer />

@@ -1,28 +1,10 @@
 ---
-/*
-  Los nav items viven aquí temporalmente.
-  Cuando se cree src/consts/nav.ts se mueven ahí y se importan.
-*/
-const navItems = [
-    { label: "Home",       href: "#",           active: true  },
-    { label: "Projects",   href: "#projects",   active: false },
-    { label: "About",      href: "#about",      active: false },
-    { label: "Experience", href: "#experience", active: false },
-    { label: "Contact",    href: "#contact",    active: false },
-];
+import { navItems } from "@consts/navbar.ts";
 ---
 
-<!--
-  fixed top-6 left-6: siempre visible, esquina superior izquierda
-  z-50: sobre el contenido de las secciones
-  bg-bg/60: color-bg del tema con 60% de opacidad (Tailwind v4 usa color-mix)
-  shadow-glow: token definido en @theme
-  font-display / font-body: tokens de fuente definidos en @theme
--->
 <nav
-    class="fixed top-6 left-6 z-50
-           bg-bg/60 backdrop-blur-xl
-           rounded-full px-8 py-3
+    class="bg-bg/60 backdrop-blur-xl
+           rounded-2xl px-8 py-3
            shadow-glow
            flex items-center gap-8
            border border-white/5"
@@ -32,19 +14,15 @@ const navItems = [
         Samu0xdev
     </span>
 
-    <!--
-      ul > li > a: estructura semantica correcta para navegacion.
-      data-section: usado luego por el IntersectionObserver para el estado activo.
-    -->
     <ul class="flex items-center gap-6 list-none m-0 p-0
-               font-body text-sm uppercase tracking-tight">
+               font-body text-xs uppercase tracking-tight">
         {navItems.map(({ label, href, active }) => (
             <li>
                 <a
                     href={href}
                     data-section={label.toLowerCase()}
                     class:list={[
-                        "transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]",
+                        "transition-all duration-300 ease-in-out",
                         active
                             ? "text-accent border-b border-accent/30 pb-0.5"
                             : "text-text-secondary hover:text-text-primary",
@@ -56,3 +34,10 @@ const navItems = [
         ))}
     </ul>
 </nav>
+
+<!-- class="fixed top-6 left-6 z-50
+           bg-bg/60 backdrop-blur-xl
+           rounded-2xl px-8 py-3
+           shadow-glow
+           flex items-center gap-8
+           border border-white/5" -->
