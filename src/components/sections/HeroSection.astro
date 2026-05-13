@@ -1,0 +1,61 @@
+---
+import { getImage } from "astro:assets";
+import HeroLoop from "@components/ui/TechLoop.astro";
+import GradientButton from "@components/ui/GradientButton.astro";
+import GlassButton from "@components/ui/GlassButton.astro";
+import heroPhoto from "@assets/images/hero.png";
+
+const heroDesktop = await getImage({ src: heroPhoto });
+const heroMobile = await getImage({ src: heroPhoto, width: 768, format: "webp", quality: 85 });
+---
+
+<section class="relative h-screen">
+    <div class="relative flex h-full items-end">
+        <div class="w-full space-y-4 pb-20 bg-accent-deep/10">
+            <h3 class="font-body text-text-primary font-light text-2xl sm:text-3xl lg:text-5xl z-20">
+                Hi, <span class="text-accent">Samuel</span> here
+            </h3>
+
+            <h2 class="font-body hero-title-gradient font-extrabold tracking-tighter text-5xl sm:text-7xl lg:text-8xl z-5">SOFTWARE</h2>
+            <h2 class="font-body hero-title-gradient font-extrabold tracking-tighter text-5xl sm:text-7xl lg:text-8xl z-20">ENGINEER |</h2>
+
+            <p class="font-body text-text-secondary font-light text-lg sm:text-xl lg:text-2xl max-w-3xl z-20">Software engineer passionate about building solutions.</p>
+            <p class="font-body text-text-secondary font-light text-lg sm:text-xl lg:text-2xl max-w-3xl z-20">I work with APIs, data and web technologies to design, optimize and scale systems.</p>
+
+            <div class="flex flex-wrap items-center gap-4 pt-3 z-20">
+                <GradientButton text="View Projects" link="/projects" />
+                <GlassButton text="Resume.pdf" link="/resume.pdf" />
+            </div>
+        </div>
+    </div>
+
+    <div class="hero-photo pointer-events-none absolute inset-y-0 z-10">
+        <picture>
+            <source media="(max-width: 768px)" srcset={heroMobile.src} type="image/webp" />
+            <img
+                src={heroDesktop.src}
+                alt="Portrait of Samuel Castro"
+                loading="eager"
+                fetchpriority="high"
+                class="h-full w-auto"
+            />
+        </picture>
+    </div>
+</section>
+
+<HeroLoop />
+
+<style>
+  /*
+    Rompe el contenedor max-w-7xl para que la imagen toque
+    y sobresalga del borde derecho del viewport.
+
+    Descomposicion del calc:
+    - max(0px, (100vw - 80rem) / 2)  = margen lateral del contenedor centrado (80rem = max-w-7xl)
+    - + 1.5rem                        = padding px-6 del <main>
+    - + 3rem                          = offset extra para salir de pantalla a la derecha
+  */
+  .hero-photo {
+    right: 0;    /* calc(-1 * (max(0px, (100vw - 80rem) / 2) + 1.5rem + 3rem)) */
+  }
+</style>
