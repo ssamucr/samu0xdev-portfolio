@@ -1,0 +1,23 @@
+---
+interface Props {
+    text: string;
+    link: string;
+    target?: string;
+}
+
+const { text, link, target } = Astro.props as Props;
+---
+
+<a href={link} target={target}
+    class="gradient-button-bg text-text-button py-3 px-8 rounded-md font-display
+    font-bold text-center transition-transform transform hover:scale-105 text-sm sm:text-base lg:text-lg"
+>
+{text}
+</a>
+
+<style>
+    .gradient-button-bg {
+        background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-deep) 100%);
+        color: var(--color-text-button);
+    }
+</style>

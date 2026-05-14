@@ -13,6 +13,8 @@
   --color-text-tertiary:  rgba(72, 72, 72, 0.4);
   --color-accent:         #C0C1FF;
   --color-accent-deep:    #2F2EBE;
+  --color-text-button:    #2724B8;
+  --color-loop:           #0A0A0A;
 
   /* --- Tipografia --- */
   --font-display: "Space Grotesk", sans-serif;
