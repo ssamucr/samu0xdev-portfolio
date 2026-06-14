@@ -1,0 +1,7 @@
+---
+const { number, text } = Astro.props;
+---
+
+<h2 class="font-body text-text-primary font-bold text-3xl sm:text-4xl lg:text-5xl">
+    <span class="text-text-tertiary text-7xl">{number < 10 ? `0${number}` : number} //</span> <br /> {text}
+</h2>

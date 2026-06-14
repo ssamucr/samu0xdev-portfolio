@@ -9,10 +9,10 @@ const heroDesktop = await getImage({ src: heroPhoto });
 const heroMobile = await getImage({ src: heroPhoto, width: 768, format: "webp", quality: 85 });
 ---
 
-<section class="h-screen w-screen grid grid-cols-10 grid-rows-[repeat(7,minmax(0,1fr))_repeat(2,minmax(0,0.5fr))] gap-4">
+<section class="h-screen w-screen grid grid-cols-10 grid-rows-[repeat(7,minmax(0,1fr))_repeat(2,minmax(0,0.5fr))] gap-2">
     <div class="contents">
         <div class="w-full space-y-4 contents">
-            <h3 class="font-body text-text-primary font-light text-2xl sm:text-3xl lg:text-5xl col-start-2 col-end-5 row-start-3">
+            <h3 class="font-body text-text-primary font-light text-2xl sm:text-3xl lg:text-5xl col-start-2 col-end-5 row-start-3 flex items-end h-full gap-2">
                 Hi, <span class="text-accent">Samuel</span> here
             </h3>
 
@@ -20,10 +20,10 @@ const heroMobile = await getImage({ src: heroPhoto, width: 768, format: "webp", 
                 SOFTWARE
             </h2>
             <h2 class="font-body hero-title-gradient font-extrabold tracking-tighter text-5xl sm:text-7xl lg:text-8xl z-20 col-start-2 col-end-7 row-start-5 row-span-1">
-                ENGINEER |
+                ENGINEER <span class="text-accent cursor-blink">|</span>
             </h2>
             
-            <p class="font-body text-text-secondary font-light text-lg sm:text-xl lg:text-2xl max-w-3xl z-20 col-start-2 col-end-8 row-start-6">
+            <p class="font-body text-text-secondary h-full font-light text-lg sm:text-xl lg:text-2xl z-20 col-start-2 col-end-8 row-start-6 flex items-end">
                 Software engineer passionate about building solutions.
                 <br>
                 I work with APIs, data and web technologies to design, optimize and scale systems.
@@ -53,3 +53,14 @@ const heroMobile = await getImage({ src: heroPhoto, width: 768, format: "webp", 
         <HeroLoop />
     </div>
 </section>
+
+<style>
+  @keyframes cursor-blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
+  }
+
+  .cursor-blink {
+    animation: cursor-blink 1s step-end infinite;
+  }
+</style>

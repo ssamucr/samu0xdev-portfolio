@@ -1,12 +1,12 @@
 ---
 import MainLayout from "@layouts/MainLayout.astro"
-import HeroSection from "@components/sections/HeroSection.astro";
 import { SITE_INFO } from "@consts/site-info";
+import ProjectSection from "@components/sections/ProjectSection.astro";
 
 const title = SITE_INFO.title;
 const description = SITE_INFO.description;
 ---
 
 <MainLayout title={title} description={description}>
-	
+	<ProjectSection />
 </MainLayout>
