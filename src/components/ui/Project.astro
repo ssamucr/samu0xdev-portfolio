@@ -33,6 +33,13 @@ const { title, description, techStack, imageUrl, projectUrl, githubUrl } = Astro
         <a href={githubUrl} target="_blank" class="text-text-primary hover:underline hover:scale-110 transition-transform duration-300"><GithubIcon class="w-5 h-5"/></a>
         <a href={projectUrl} target="_blank" class="text-text-primary hover:underline hover:scale-110 transition-transform duration-300"><OpenLinkIcon class="w-5 h-5"/></a>
     </div>
+    <a
+        href={projectUrl}
+        target="_blank"
+        rel="noreferrer noopener"
+        aria-label={`Ver proyecto ${title}`}
+        class="col-start-1 col-end-3 row-start-1 row-end-2 z-16 block"
+    ></a>
     <div class="col-start-1 col-end-3 row-start-1 row-end-5 z-15 image-gradient"></div>
     <div class="col-start-1 col-end-3 row-start-1 row-end-5 z-10">
         <Image
