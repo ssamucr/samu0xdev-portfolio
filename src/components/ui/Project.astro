@@ -10,17 +10,17 @@ const { title, description, techStack, imageUrl, projectUrl, githubUrl } = Astro
 
 <div class="project-container rounded-2xl overflow-hidden shadow-lg">
     <div class="div1 z-20 flex items-end px-6">
-        <h3 class="font-body text-text-primary font-bold text-2xl sm:text-3xl lg:text-4xl">
+        <h3 class="font-body text-text-primary font-bold text-md sm:text-lg lg:text-xl">
             {title}
         </h3>
     </div>
     <div class="div2 z-20 flex items-center px-6">
-        <p class="font-body text-text-secondary h-full font-normal text-lg sm:text-xl lg:text-xl z-20 flex items-center">
+        <p class="font-body text-text-secondary h-full font-normal text-xs sm:text-xs lg:text-md z-20 flex items-center">
             {description}
         </p>
     </div>
     <div class="div3 z-20 flex items-center px-6">
-        <ul class="list-none list-inside font-display text-accent h-full font-bold text-base sm:text-xs lg:text-sm z-20 flex items-center gap-4">
+        <ul class="list-none list-inside font-display text-accent h-full font-bold text-xs sm:text-xs lg:text-xs z-20 flex items-center gap-4">
             {techStack.map((tech: unknown, index: number) => (
                 <>
                     <li>{tech}</li>
@@ -29,11 +29,11 @@ const { title, description, techStack, imageUrl, projectUrl, githubUrl } = Astro
             ))}
         </ul>
     </div>
-    <div class="div4 z-20 flex items-center justify-center gap-6">
-        <a href={githubUrl} target="_blank" class="text-text-primary hover:underline hover:scale-110 transition-transform duration-300"><GithubIcon class="w-6 h-6"/></a>
-        <a href={projectUrl} target="_blank" class="text-text-primary hover:underline hover:scale-110 transition-transform duration-300"><OpenLinkIcon class="w-6 h-6"/></a>
+    <div class="div4 z-20 p-3 flex items-center justify-center gap-6">
+        <a href={githubUrl} target="_blank" class="text-text-primary hover:underline hover:scale-110 transition-transform duration-300"><GithubIcon class="w-5 h-5"/></a>
+        <a href={projectUrl} target="_blank" class="text-text-primary hover:underline hover:scale-110 transition-transform duration-300"><OpenLinkIcon class="w-5 h-5"/></a>
     </div>
-    <div class="col-start-1 col-end-3 row-start-1 row-end-5 z-[15] image-gradient"></div>
+    <div class="col-start-1 col-end-3 row-start-1 row-end-5 z-15 image-gradient"></div>
     <div class="col-start-1 col-end-3 row-start-1 row-end-5 z-10">
         <Image
             src={imageUrl}
@@ -51,8 +51,8 @@ const { title, description, techStack, imageUrl, projectUrl, githubUrl } = Astro
 <style>
     .project-container {
         display: grid;
-        grid-template-columns: 8fr 1fr;
-        grid-template-rows: 16fr repeat(2, 4fr) 3fr;
+        grid-template-columns: 1fr auto;
+        grid-template-rows: 1fr auto auto auto;
         height: 100%;
         width: 100%;
     }
@@ -73,6 +73,6 @@ const { title, description, techStack, imageUrl, projectUrl, githubUrl } = Astro
         /* background-color: rgba(255, 255, 0, 0.1); */
     }
     .image-gradient {
-        background: linear-gradient(to bottom, transparent 10%, black 85%);
+        background: linear-gradient(to bottom, transparent 10%, #131313 85%);
     }
 </style>
