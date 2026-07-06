@@ -1,0 +1,52 @@
+---
+import Heading from "@components/ui/Heading.astro";
+---
+
+<section class="about-container mb-15">
+    <div class="heading">
+        <Heading number={2} text="About Me" />
+    </div>
+    <div class="graphic">
+        
+    </div>
+    <div class="text text-xl font-body text-text-secondary pt-2">
+        <p>
+            I'm Samuel, a <span class="text-accent">Software Engineer</span> from Panama focused on building
+            systems that make an impact. I graduated from Universidad
+            Tecnológica de Panamá and currently working in Business Intelligence
+            at Banco Delta, using Microsoft Fabric, Azure and <span class="text-accent">SQL</span> to deliver data
+            and KPIs that drive decision-making.
+        </p>
+        <br>
+        <p>
+            I enjoy building <span class="text-accent">APIs</span> and <span class="text-accent">web applications</span>, designing systems and
+            integrating services to create scalable and efficient solutions, working
+            with technologies like <span class="text-accent">Python</span>, <span class="text-accent">JavaScript</span> and <span class="text-accent">React</span>. I like solving
+            complex problems and turning them into structured, reliable solutions.
+        </p>
+        <br>
+        <p>
+            I'm a self-learner at heart, always exploring new technologies and
+            improving my skills across backend, modern web development, and
+            the recent game-changer, <span class="text-accent">AI</span>. Outside of work, I’m into setups, gaming
+            and the gym. I also enjoy exploring nature — especially rivers, natural
+            pools and hidden spots across Panama.
+        </p>
+        <br>
+        <p>
+            <span class="font-bold text-text-primary">Let’s build something great.</span>
+        </p>
+    </div>
+</section>
+
+<style>
+    .about-container {
+        display: grid;
+        grid-template-columns: 6fr 8fr;
+        grid-template-rows: 1fr 3fr;
+        gap: 12px;
+    }
+    .heading { grid-area: 1 / 1 / 2 / 2; }
+    .text { grid-area: 1 / 2 / 3 / 3; }
+    .graphic { grid-area: 2 / 1 / 3 / 2; background-color: rgba(0, 0, 255, 0.1); }
+</style>
