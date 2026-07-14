@@ -1,5 +1,6 @@
 ---
 import Heading from "@components/ui/Heading.astro";
+import ParticleProfile from "@components/ui/ParticleProfile.astro";
 ---
 
 <section class="about-container mb-15">
@@ -7,7 +8,7 @@ import Heading from "@components/ui/Heading.astro";
         <Heading number={2} text="About Me" />
     </div>
     <div class="graphic">
-        
+        <ParticleProfile />
     </div>
     <div class="text text-xl font-body text-text-secondary pt-2">
         <p>
@@ -48,5 +49,5 @@ import Heading from "@components/ui/Heading.astro";
     }
     .heading { grid-area: 1 / 1 / 2 / 2; }
     .text { grid-area: 1 / 2 / 3 / 3; }
-    .graphic { grid-area: 2 / 1 / 3 / 2; background-color: rgba(0, 0, 255, 0.1); }
+    .graphic { grid-area: 2 / 1 / 3 / 2; }
 </style>
