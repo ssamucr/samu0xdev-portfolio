@@ -252,8 +252,20 @@
     ro.observe(wrapper);
 
     // ---- View Transitions cleanup ----
-    document.addEventListener('astro:before-preparation', () => {
-        if (rafId !== null) { cancelAnimationFrame(rafId); rafId = null; }
-        ro.disconnect();
+    // Solo limpiar cuando se navega a una ruta diferente, no en hash-only navigation
+    document.addEventListener('astro:before-preparation', (e) => {
+        const next = (e as any).to as string | undefined;
+        if (!next) return;
+        try {
+            const nextPathname = new URL(next, location.href).pathname;
+            if (nextPathname !== location.pathname) {
+                if (rafId !== null) { cancelAnimationFrame(rafId); rafId = null; }
+                ro.disconnect();
+            }
+        } catch {
+            // URL inválida — limpiar por seguridad
+            if (rafId !== null) { cancelAnimationFrame(rafId); rafId = null; }
+            ro.disconnect();
+        }
     }, { once: true });
 </script>

@@ -35,9 +35,26 @@ import { navItems } from "@consts/navbar.ts";
     </ul>
 </nav>
 
-<!-- class="fixed top-6 left-6 z-50
-           bg-bg/60 backdrop-blur-xl
-           rounded-2xl px-8 py-3
-           shadow-glow
-           flex items-center gap-8
-           border border-white/5" -->
+<script>
+    function initHashScroll() {
+        document.querySelectorAll<HTMLAnchorElement>('nav a[href^="#"]').forEach((anchor) => {
+            anchor.addEventListener('click', (e) => {
+                e.preventDefault();
+                const href = anchor.getAttribute('href')!;
+                if (href === '#') {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    history.pushState(null, '', '#');
+                } else {
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                        history.pushState(null, '', href);
+                    }
+                }
+            });
+        });
+    }
+
+    // Inicializar en carga inicial y tras cada view transition
+    document.addEventListener('astro:page-load', initHashScroll);
+</script>
