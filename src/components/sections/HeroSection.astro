@@ -9,7 +9,7 @@ const heroDesktop = await getImage({ src: heroPhoto });
 const heroMobile = await getImage({ src: heroPhoto, width: 768, format: "webp", quality: 85 });
 ---
 
-<section class="h-screen w-screen grid grid-cols-10 grid-rows-[repeat(7,minmax(0,1fr))_repeat(2,minmax(0,0.5fr))] gap-2">
+<section id="hero-section" class="h-screen w-screen grid grid-cols-10 grid-rows-[repeat(7,minmax(0,1fr))_repeat(2,minmax(0,0.5fr))] gap-2">
     <div class="contents">
         <div class="w-full space-y-4 contents">
             <h3 class="font-body text-text-primary font-light text-2xl sm:text-3xl lg:text-5xl col-start-2 col-end-5 row-start-3 flex items-end h-full gap-2">

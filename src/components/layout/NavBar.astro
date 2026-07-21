@@ -36,23 +36,48 @@ import { navItems } from "@consts/navbar.ts";
 </nav>
 
 <script>
+    function setActiveLink(hash: string) {
+        const anchors = document.querySelectorAll<HTMLAnchorElement>('nav a[href^="#"]');
+        const normalizedHash = hash || window.location.hash || '#hero-section';
+
+        anchors.forEach((anchor) => {
+            const href = anchor.getAttribute('href')!;
+            const isActive = href === normalizedHash || (normalizedHash === '' && href === '#hero-section');
+
+            anchor.classList.toggle('text-accent', isActive);
+            anchor.classList.toggle('border-b', isActive);
+            anchor.classList.toggle('border-accent/30', isActive);
+            anchor.classList.toggle('pb-0.5', isActive);
+            anchor.classList.toggle('text-text-secondary', !isActive);
+            anchor.classList.toggle('hover:text-text-primary', !isActive);
+        });
+    }
+
     function initHashScroll() {
-        document.querySelectorAll<HTMLAnchorElement>('nav a[href^="#"]').forEach((anchor) => {
+        const anchors = document.querySelectorAll<HTMLAnchorElement>('nav a[href^="#"]');
+
+        anchors.forEach((anchor) => {
             anchor.addEventListener('click', (e) => {
                 e.preventDefault();
                 const href = anchor.getAttribute('href')!;
+
                 if (href === '#') {
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                     history.pushState(null, '', '#');
+                    setActiveLink('#hero-section');
                 } else {
                     const target = document.querySelector(href);
                     if (target) {
                         target.scrollIntoView({ behavior: 'smooth' });
                         history.pushState(null, '', href);
+                        setActiveLink(href);
                     }
                 }
             });
         });
+
+        window.addEventListener('hashchange', () => setActiveLink(window.location.hash));
+        setActiveLink(window.location.hash);
     }
 
     // Inicializar en carga inicial y tras cada view transition
