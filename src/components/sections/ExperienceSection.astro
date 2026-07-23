@@ -1,0 +1,116 @@
+---
+import Heading from "@components/ui/Heading.astro";
+import LogItem from "@components/ui/LogItem.astro";
+
+const experiences = [
+    {
+        date: "[2024.09 - PRESENT]",
+        active: true,
+        role: "BI Programmer & Data Analyst",
+        company: "@Banco Delta",
+        description: [
+            "Designed and optimized ETL pipelines, Lakehouse solutions, and data workflows using Microsoft Fabric, Azure Data Factory, and SSIS",
+            "Built advanced SQL queries, Power BI dashboards, and reporting solutions to support business decision-making",
+            "Developed FastAPI services and AI-powered BPM automations, improving operational efficiency and reducing processing times"
+        ]
+    },
+    {
+        date: "[2025]",
+        active: false,
+        role: "Full Stack Developer",
+        company: "@UTP AWS Academic Project",
+        description: [
+            "Designed and deployed a cloud-native full-stack application on AWS using a serverless architecture",
+            "Built scalable backend services with FastAPI and PostgreSQL, integrated with a modern Next.js frontend",
+            "Architected cloud infrastructure with Amplify, API Gateway, Lambda, and RDS following best practices"
+        ]
+    },
+    {
+        date: "[2022 - 2023]",
+        active: false,
+        role: "Full Stack Developer",
+        company: "@Reto Innova Banesco",
+        description: [
+            "Gathered requirements and designed software solutions for legal and financial process automation",
+            "Developed full-stack applications with Django REST Framework, React, and MySQL",
+            "Implemented role-based workflows, REST APIs, and automated document generation, earning 2nd place (2022) and 1st place (2023)"
+        ]
+    }
+];
+
+---
+
+<section id="experience-section" class="mb-15">
+    <div class="heading">
+        <Heading number={4} text="Experience Log" />
+    </div>
+    <div class="experiences-container pl-5">
+        {
+            experiences.map((experience, index) => (
+                <div class={`log-item ${experience.active ? 'log-item-active' : ''} exp${index + 1}`}>
+                    <LogItem
+                        date={experience.date}
+                        active={experience.active}
+                        role={experience.role}
+                        company={experience.company}
+                        description={experience.description}
+                    />
+                </div>
+            ))
+        }
+    </div>
+</section>
+
+<style>
+    .experiences-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        gap: 48px;
+        border-left: 2px solid var(--color-text-tertiary);
+    }
+    .log-item {
+        position: relative;
+    }
+
+    .log-item::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -27px;
+        width: 12px;
+        height: 12px;
+        box-sizing: border-box;
+        border: 2px solid var(--color-text-quaternary);
+        border-radius: 50%;
+        background: var(--color-bg);
+        transform: translateY(-50%);
+    }
+
+    .log-item-active {
+        position: relative;
+    }
+
+    .log-item-active::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -27px;
+        width: 12px;
+        height: 12px;
+        box-sizing: border-box;
+        border: 2px solid var(--color-accent);
+        border-radius: 50%;
+        background: var(--color-bg);
+        transform: translateY(-50%);
+        box-shadow:
+            0 0 4px rgba(192, 193, 255, 1),
+            0 0 12px rgba(192, 193, 255, 0.95),
+            0 0 28px rgba(192, 193, 255, 0.8),
+            0 0 56px rgba(192, 193, 255, 0.6);
+    }
+
+    .exp1 { grid-area: 1 / 1 / 2 / 2; }
+    .exp2 { grid-area: 2 / 1 / 3 / 2; }
+    .exp3 { grid-area: 3 / 1 / 4 / 2; }
+</style>

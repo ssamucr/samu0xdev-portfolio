@@ -1,0 +1,50 @@
+---
+
+const { date, active, role, company, description } = Astro.props;
+
+---
+<div class="experience-container">
+    <div class="console-head flex items-center justify-between">
+        <div class="flex items-center gap-4">
+            <p class="date text-sm text-text-secondary">{date}</p>
+            {active && <p class="status text-sm text-accent">STATUS: [EXEC_OK]</p>}
+            {!active && <p class="status text-sm status-inactive">STATUS: [ARCHIVED]</p>}
+            <p class="role text-sm text-text-primary px-3 py-1.5 rounded-xs border-text-tertiary border">ROLE: {role}</p>
+            <p class="company text-md text-accent font-bold">{company}</p>
+        </div>
+        {active && <p class="tracing text-sm text-accent"><span class="tracing-bullet">●</span>&nbsp; TRACING ACTIVE</p>}
+    </div>
+    <div class="description bg-black text-sm p-4 flex flex-col gap-5 rounded-md">
+        <p class="command text-xs text-text-quaternary">&gt; TAIL -F /VAR/LOG/{company.toUpperCase().replace(/\s+/g, '_').replace('@', '')}.LOG</p>
+        <ul class="flex flex-col gap-3">
+            {description.map((desc: unknown) => (
+                <li>»&nbsp; {desc}</li>
+            ))}
+        </ul>
+    </div>
+</div>
+
+<style>
+    .experience-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 4fr;
+        gap: 6px;
+    }
+    .console-head { grid-area: 1 / 1 / 2 / 2; }
+    .description { grid-area: 2 / 1 / 3 / 2; }
+    .role {
+        background-color: #181818af;
+    }
+    .tracing-bullet {
+        color: #c0c1ff;
+        text-shadow:
+            0 0 4px rgba(192, 193, 255, 1),
+            0 0 12px rgba(192, 193, 255, 0.95),
+            0 0 28px rgba(192, 193, 255, 0.8),
+            0 0 56px rgba(192, 193, 255, 0.6);
+    }
+    .status-inactive {
+        color: #939EB5;
+    }
+</style>
