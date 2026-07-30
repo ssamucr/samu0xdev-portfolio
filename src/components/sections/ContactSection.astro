@@ -1,6 +1,10 @@
 ---
 import Heading from "@components/ui/Heading.astro";
 import {Image} from "astro:assets";
+import SendMailIcon from '@components/icons/SendMailIcon.astro';
+import Mail from '@components/icons/MailIcon.astro';
+import Linkedin from '@components/icons/LinkedinIcon.astro';
+import Github from '@components/icons/GithubIcon.astro'
 ---
 
 <section id="contact-section" class="mb-15">
@@ -10,7 +14,7 @@ import {Image} from "astro:assets";
     <div class="contact-container grid grid-cols-2 grid-rows-1 gap-12">
         <div class="flex flex-col gap-4">
             <h3>What do you have in mind?</h3>
-            <p>You can also reach me directly at <a href="mailto:your-email@example.com">your-email@example.com</a>.</p>
+            <p>You can also reach me directly at <a href="mailto:samu0xdev@gmail.com" class="underline">samu0xdev@gmail.com</a>.</p>
             <form class="contact-form grid grid-cols-6 grid-rows-6 gap-4" action="https://formspree.io/f/your-form-id" method="POST">
                 <div class="form-group col-start-1 col-end-3 row-start-1 row-end-2">
                     <input type="text" id="name" name="name" placeholder="Name" class="border border-gray-400 rounded-xs w-full h-full p-2" required />
@@ -24,26 +28,39 @@ import {Image} from "astro:assets";
                 <div class="form-group col-start-1 col-end-7 row-start-3 row-end-6">
                     <textarea id="message" name="message" placeholder="Write here everything you want to tell me..." rows="5" class="border border-gray-400 rounded-xs w-full h-full p-2" required></textarea>
                 </div>
-                <button class="col-start-5 col-end-7 row-start-6 row-end-7 gradient-button-bg text-text-button py-3 px-8 rounded-md font-display
-    font-bold text-center transition-transform transform hover:scale-102 text-sm sm:text-base lg:text-md cursor-pointer" type="submit">Send</button>
+                <button class="col-start-5 col-end-7 row-start-6 row-end-7 gradient-button-bg text-text-primary py-3 px-8 rounded-md font-display
+    font-bold text-center transition-transform transform hover:scale-102 text-sm sm:text-base lg:text-md cursor-pointer flex flex-row justify-center items-center gap-2" type="submit">Send <SendMailIcon class="w-5 h-5"/></button>
             </form>
         </div>
-        <div>
+        <div class="flex flex-col gap-4 justify-center">
             <p>Let's connect</p>
-            <div>
-                <Image src="/images/mail.svg" alt="Email" width={24} height={24} />
-                <p>Email</p>
-                <a href="mailto:your-email@example.com">your-email@example.com</a>
+            <div class="flex flex-row gap-4 items-center">
+                <div class="p-4 bg-icon rounded-lg">
+                    <Mail class="w-5 h-5"/>
+                </div>
+                <div>
+                    <p>Email</p>
+                    <a href="mailto:samu0xdev@gmail.com" class="underline">samu0xdev@gmail.com</a>
+                </div>
             </div>
-            <div>
-                <Image src="/images/linkedin.svg" alt="LinkedIn" width={24} height={24} />
-                <p>Linkedin</p>
-                <a href="https://linkedin.com/in/your-username" target="_blank" rel="noopener noreferrer">your-username</a>
+            <div class="flex flex-row gap-4 items-center">
+                <div class="p-4 bg-icon rounded-lg">
+                    <Linkedin class="w-5 h-5"/>
+                </div>
+                <div>
+                    <p>Linkedin</p>
+                    <a href="https://linkedin.com/in/ssamucr" target="_blank" rel="noopener noreferrer" class="underline">linkedin.com/in/ssamucr</a>
+                </div>
+                
             </div>
-            <div>
-                <Image src="/images/github.svg" alt="Github" width={24} height={24} />
-                <p>GitHub</p>
-                <a href="https://github.com/your-username" target="_blank" rel="noopener noreferrer">your-username</a>
+            <div class="flex flex-row gap-4 items-center">
+                <div class="p-4 bg-icon rounded-lg">
+                    <Github class="w-5 h-5"/>
+                </div>
+                <div>
+                    <p>GitHub</p>
+                    <a href="https://github.com/ssamucr" target="_blank" rel="noopener noreferrer" class="underline">github.com/ssamucr</a>
+                </div>
             </div>
         </div>
     </div>
@@ -51,7 +68,10 @@ import {Image} from "astro:assets";
 
 <style>
     .gradient-button-bg {
-        background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-deep) 100%);
-        color: var(--color-text-button);
+        background: linear-gradient(120deg, var(--color-accent) 0%, var(--color-accent-deep) 40%, #171717 100%);
+    }
+
+    .bg-icon {
+        background-color: #181818af;
     }
 </style>
