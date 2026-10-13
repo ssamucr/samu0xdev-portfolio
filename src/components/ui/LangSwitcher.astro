@@ -1,0 +1,42 @@
+---
+import { LANGUAGES, getLangUrl, useTranslations, type Lang } from "@i18n/ui";
+
+interface Props {
+    lang: Lang;
+}
+
+const { lang } = Astro.props as Props;
+const t = useTranslations(lang);
+---
+
+<div class="flex items-center gap-1 font-body text-xs tracking-tight px-1.5" role="group" aria-label={t('nav.language')}>
+    {(Object.keys(LANGUAGES) as Lang[]).map((l, index) => (
+        <>
+            {index > 0 && <span class="text-text-quaternary" aria-hidden="true">/</span>}
+            <a
+                href={getLangUrl(l)}
+                hreflang={l}
+                lang={l}
+                data-lang-link
+                aria-current={l === lang ? "true" : undefined}
+                class:list={[
+                    "transition-colors duration-300",
+                    l === lang ? "text-accent font-bold" : "text-text-secondary hover:text-text-primary",
+                ]}
+            >
+                {LANGUAGES[l]}
+            </a>
+        </>
+    ))}
+</div>
+
+<script>
+    // Cambio de idioma con recarga completa (los scripts de la pagina, como el canvas
+    // de particulas, se inicializan una sola vez) conservando la seccion actual.
+    document.addEventListener('click', (e) => {
+        const link = (e.target as Element).closest<HTMLAnchorElement>('a[data-lang-link]');
+        if (!link || link.getAttribute('aria-current') === 'true') return;
+        e.preventDefault();
+        window.location.assign(link.getAttribute('href')! + window.location.hash);
+    });
+</script>

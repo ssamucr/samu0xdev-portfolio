@@ -1,43 +1,116 @@
 ---
 import { navItems } from "@consts/navbar.ts";
+import { links } from "@consts/social-dock.ts";
+import LangSwitcher from "@components/ui/LangSwitcher.astro";
+import { useTranslations, type Lang } from "@i18n/ui";
+
+interface Props {
+    lang: Lang;
+}
+
+const { lang } = Astro.props as Props;
+const t = useTranslations(lang);
 ---
 
-<nav
-    class="bg-bg/60 backdrop-blur-xl
-           rounded-2xl px-8 py-3
-           shadow-glow
-           flex items-center gap-8
-           border border-white/5"
-    aria-label="Main navigation"
->
-    <span class="font-display font-bold text-lg text-text-primary mr-4">
-        Samu0xdev
-    </span>
+<div class="relative flex-1 md:flex-none">
+    <nav
+        class="bg-bg/60 backdrop-blur-xl
+               rounded-2xl px-5 md:px-8 py-3
+               shadow-glow
+               flex items-center justify-between md:justify-start gap-4 md:gap-8
+               border border-white/5"
+        aria-label="Main navigation"
+    >
+        <span class="font-display font-bold text-lg text-text-primary md:mr-4">
+            Samu0xdev
+        </span>
 
-    <ul class="flex items-center gap-6 list-none m-0 p-0
-               font-body text-xs uppercase tracking-tight">
-        {navItems.map(({ label, href, active }) => (
-            <li>
+        <ul class="hidden md:flex items-center gap-6 list-none m-0 p-0
+                   font-body text-xs uppercase tracking-tight">
+            {navItems.map(({ key, label, href, active }) => (
+                <li>
+                    <a
+                        href={href}
+                        data-section={label.toLowerCase()}
+                        class:list={[
+                            "transition-all duration-300 ease-in-out",
+                            active
+                                ? "text-accent border-b border-accent/30 pb-0.5"
+                                : "text-text-secondary hover:text-text-primary",
+                        ]}
+                    >
+                        {t(key)}
+                    </a>
+                </li>
+            ))}
+        </ul>
+
+        <div class="md:hidden flex items-center gap-3 ml-auto">
+            <LangSwitcher lang={lang} />
+        <button
+            type="button"
+            id="nav-toggle"
+            class="md:hidden flex items-center justify-center p-1 cursor-pointer text-text-primary"
+            aria-label={t('nav.menu')}
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+        >
+            <svg id="nav-icon-menu" width="22" height="17" viewBox="0 0 22 17" fill="currentColor" aria-hidden="true">
+                <rect x="0" y="0" width="11" height="3.5" rx="1.75" />
+                <rect x="0" y="6.75" width="22" height="3.5" rx="1.75" />
+                <rect x="11" y="13.5" width="11" height="3.5" rx="1.75" />
+            </svg>
+            <svg id="nav-icon-close" width="22" height="17" viewBox="0 0 22 17" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" aria-hidden="true" hidden>
+                <path d="M4.5 1.5 L17.5 15.5 M17.5 1.5 L4.5 15.5" />
+            </svg>
+        </button>
+        </div>
+    </nav>
+
+    <div
+        id="mobile-menu"
+        hidden
+        class="md:hidden absolute top-full inset-x-0 mt-2
+               bg-bg/90 backdrop-blur-xl rounded-2xl p-5
+               shadow-glow border border-white/5"
+    >
+        <ul class="flex flex-col gap-4 list-none m-0 p-0 font-body text-sm uppercase tracking-tight">
+            {navItems.map(({ key, label, href, active }) => (
+                <li>
+                    <a
+                        href={href}
+                        data-section={label.toLowerCase()}
+                        class:list={[
+                            "transition-all duration-300 ease-in-out",
+                            active
+                                ? "text-accent border-b border-accent/30 pb-0.5"
+                                : "text-text-secondary hover:text-text-primary",
+                        ]}
+                    >
+                        {t(key)}
+                    </a>
+                </li>
+            ))}
+        </ul>
+        <div class="flex items-center gap-1 mt-5 pt-4 border-t border-white/5">
+            {links.map(({ label, href, icon }) => (
                 <a
                     href={href}
-                    data-section={label.toLowerCase()}
-                    class:list={[
-                        "transition-all duration-300 ease-in-out",
-                        active
-                            ? "text-accent border-b border-accent/30 pb-0.5"
-                            : "text-text-secondary hover:text-text-primary",
-                    ]}
-                >
-                    {label}
-                </a>
-            </li>
-        ))}
-    </ul>
-</nav>
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    title={label}
+                    class="text-text-secondary hover:text-accent transition-colors duration-300 p-1.5 flex items-center"
+                    set:html={icon}
+                />
+            ))}
+        </div>
+    </div>
+</div>
 
 <script>
     function setActiveLink(hash: string) {
-        const anchors = document.querySelectorAll<HTMLAnchorElement>('nav a[href^="#"]');
+        const anchors = document.querySelectorAll<HTMLAnchorElement>('nav a[href^="#"], #mobile-menu a[href^="#"]');
         const normalizedHash = hash || window.location.hash || '#hero-section';
 
         anchors.forEach((anchor) => {
@@ -54,7 +127,7 @@ import { navItems } from "@consts/navbar.ts";
     }
 
     function initHashScroll() {
-        const anchors = document.querySelectorAll<HTMLAnchorElement>('nav a[href^="#"]');
+        const anchors = document.querySelectorAll<HTMLAnchorElement>('nav a[href^="#"], #mobile-menu a[href^="#"]');
 
         anchors.forEach((anchor) => {
             anchor.addEventListener('click', (e) => {
@@ -80,6 +153,31 @@ import { navItems } from "@consts/navbar.ts";
         setActiveLink(window.location.hash);
     }
 
+    function initMobileMenu() {
+        const toggle = document.getElementById('nav-toggle') as HTMLButtonElement | null;
+        const menu = document.getElementById('mobile-menu');
+        if (!toggle || !menu) return;
+
+        const iconMenu = toggle.querySelector<SVGElement>('#nav-icon-menu')!;
+        const iconClose = toggle.querySelector<SVGElement>('#nav-icon-close')!;
+        const setOpen = (open: boolean) => {
+            menu.hidden = !open;
+            toggle.setAttribute('aria-expanded', String(open));
+            iconMenu.toggleAttribute('hidden', open);
+            iconClose.toggleAttribute('hidden', !open);
+        };
+
+        toggle.addEventListener('click', () => setOpen(menu.hidden));
+        menu.querySelectorAll('a[href^="#"]').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+        document.addEventListener('click', (e) => {
+            if (!menu.hidden && !(e.target as Element).closest('#mobile-menu, #nav-toggle')) setOpen(false);
+        });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+    }
+
     // Inicializar en carga inicial y tras cada view transition
-    document.addEventListener('astro:page-load', initHashScroll);
+    document.addEventListener('astro:page-load', () => {
+        initHashScroll();
+        initMobileMenu();
+    });
 </script>

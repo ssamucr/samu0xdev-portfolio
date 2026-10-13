@@ -1,4 +1,12 @@
 ---
+import { useTranslations, type Lang } from "@i18n/ui";
+
+interface Props {
+    lang: Lang;
+}
+
+const { lang } = Astro.props as Props;
+const t = useTranslations(lang);
 const year = new Date().getFullYear();
 ---
 
@@ -6,9 +14,8 @@ const year = new Date().getFullYear();
     <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-center">
 
         <p class="font-body text-xs text-text-secondary tracking-tight text-center">
-              Built and designed by Samuel Castro. <br>All rights reserved. &copy; {year}
+              {t('footer.credits')} <br>{t('footer.rights')} &copy; {year}
         </p>
 
     </div>
 </footer>
-

@@ -1,12 +1,20 @@
 ---
 import { links } from "@consts/social-dock.ts";
+import LangSwitcher from "@components/ui/LangSwitcher.astro";
+import type { Lang } from "@i18n/ui";
+
+interface Props {
+    lang: Lang;
+}
+
+const { lang } = Astro.props as Props;
 ---
 
 <aside
-    class="bg-bg/60 backdrop-blur-xl
+    class="hidden md:flex bg-bg/60 backdrop-blur-xl
            rounded-2xl px-4 py-3
            shadow-glow
-           flex items-center gap-1
+           items-center gap-1
            border border-white/5"
     aria-label="Social links"
 >
@@ -24,12 +32,6 @@ import { links } from "@consts/social-dock.ts";
             set:html={icon}
         />
     ))}
+    <span class="w-px h-5 bg-white/10 mx-2" aria-hidden="true"></span>
+    <LangSwitcher lang={lang} />
 </aside>
-
-
-<!-- class="fixed top-6 right-6 z-50
-           bg-bg/60 backdrop-blur-xl
-           rounded-2xl px-4 py-3
-           shadow-glow
-           flex items-center gap-1
-           border border-white/5" -->

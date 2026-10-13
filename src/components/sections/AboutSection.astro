@@ -1,16 +1,55 @@
 ---
 import Heading from "@components/ui/Heading.astro";
 import ParticleProfile from "@components/ui/ParticleProfile.astro";
+import { useTranslations, type Lang } from "@i18n/ui";
+
+interface Props {
+    lang: Lang;
+}
+
+const { lang } = Astro.props as Props;
+const t = useTranslations(lang);
 ---
 
 <section id="about-section" class="about-container mb-15">
     <div class="heading">
-        <Heading number={3} text="About Me" />
+        <Heading number={3} text={t('about.title')} />
     </div>
     <div class="graphic">
         <ParticleProfile />
     </div>
-    <div class="text text-xl font-body text-text-secondary pt-2">
+    <div class="text text-lg leading-8 md:text-xl md:leading-7 font-body text-text-secondary pt-2">
+    {lang === "es" ? (
+        <>
+        <p>
+            Soy Samuel, <span class="text-accent">Ingeniero de Software</span> de Panamá enfocado en construir
+            sistemas que generan impacto. Me gradué de la Universidad
+            Tecnológica de Panamá y actualmente trabajo en Business Intelligence
+            en Banco Delta, usando Microsoft Fabric, Azure y <span class="text-accent">SQL</span> para entregar datos
+            y KPIs que impulsan la toma de decisiones.
+        </p>
+        <br>
+        <p>
+            Disfruto construir <span class="text-accent">APIs</span> y <span class="text-accent">aplicaciones web</span>, diseñar sistemas e
+            integrar servicios para crear soluciones escalables y eficientes, trabajando
+            con tecnologías como <span class="text-accent">Python</span>, <span class="text-accent">JavaScript</span> y <span class="text-accent">React</span>. Me gusta resolver
+            problemas complejos y convertirlos en soluciones estructuradas y confiables.
+        </p>
+        <br>
+        <p>
+            Soy autodidacta de corazón, siempre explorando nuevas tecnologías y
+            mejorando mis habilidades en backend, desarrollo web moderno y
+            el reciente cambio de juego, la <span class="text-accent">IA</span>. Fuera del trabajo, me gustan los setups, los videojuegos
+            y el gimnasio. También disfruto explorar la naturaleza, especialmente ríos, pozas
+            naturales y rincones escondidos por todo Panamá.
+        </p>
+        <br>
+        <p>
+            <span class="font-bold text-text-primary">Construyamos algo grandioso.</span>
+        </p>
+        </>
+    ) : (
+        <>
         <p>
             I'm Samuel, a <span class="text-accent">Software Engineer</span> from Panama focused on building
             systems that make an impact. I graduated from Universidad
@@ -37,17 +76,33 @@ import ParticleProfile from "@components/ui/ParticleProfile.astro";
         <p>
             <span class="font-bold text-text-primary">Let’s build something great.</span>
         </p>
+        </>
+    )}
     </div>
 </section>
 
 <style>
+    /* Mobile: heading, grafico y texto apilados */
     .about-container {
         display: grid;
-        grid-template-columns: 6fr 8fr;
-        grid-template-rows: 1fr 3fr;
+        grid-template-columns: 1fr;
         gap: 12px;
     }
-    .heading { grid-area: 1 / 1 / 2 / 2; }
-    .text { grid-area: 1 / 2 / 3 / 3; }
-    .graphic { grid-area: 2 / 1 / 3 / 2; }
+    .graphic {
+        width: 100%;
+        max-width: 22rem;
+        margin: 0 auto;
+    }
+
+    /* md+: heading + grafico a la izquierda, texto a la derecha */
+    @media (min-width: 768px) {
+        .about-container {
+            grid-template-columns: 6fr 8fr;
+            grid-template-rows: 1fr 3fr;
+        }
+        .graphic { max-width: none; margin: 0; }
+        .heading { grid-area: 1 / 1 / 2 / 2; }
+        .text { grid-area: 1 / 2 / 3 / 3; }
+        .graphic { grid-area: 2 / 1 / 3 / 2; }
+    }
 </style>

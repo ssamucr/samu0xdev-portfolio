@@ -6,13 +6,12 @@ import AboutSection from "@components/sections/AboutSection.astro"
 import ExperienceSection from "@components/sections/ExperienceSection.astro"
 import ContactSection from "@components/sections/ContactSection.astro"
 
-const title = SITE_INFO.title;
-const description = SITE_INFO.description;
+const lang = "en";
 ---
 
-<MainLayout title={title} description={description}>
-	<ProjectSection />
-	<AboutSection />
-	<ExperienceSection />
+<MainLayout lang={lang} title={SITE_INFO.title}>
+	<ProjectSection lang={lang} />
+	<AboutSection lang={lang} />
+	<ExperienceSection lang={lang} />
 	<!-- <ContactSection /> -->
 </MainLayout>

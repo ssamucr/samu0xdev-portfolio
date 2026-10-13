@@ -19,6 +19,9 @@
       "@consts/*": [
         "./src/consts/*"
       ],
+      "@i18n/*": [
+        "./src/i18n/*"
+      ],
       "@assets/*": [
         "./src/assets/*"
       ]

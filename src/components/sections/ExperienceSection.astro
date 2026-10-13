@@ -1,40 +1,69 @@
 ---
 import Heading from "@components/ui/Heading.astro";
 import LogItem from "@components/ui/LogItem.astro";
+import { useTranslations, type Lang } from "@i18n/ui";
+
+interface Props {
+    lang: Lang;
+}
+
+const { lang } = Astro.props as Props;
+const t = useTranslations(lang);
 
 const experiences = [
     {
-        date: "[2024.09 - PRESENT]",
+        date: `[2024.09 - ${t('experience.present')}]`,
         active: true,
-        role: "BI Programmer & Data Analyst",
+        role: { en: "BI Programmer & Data Analyst", es: "Programador BI y Analista de Datos" },
         company: "@Banco Delta",
-        description: [
-            "Designed and optimized ETL pipelines, Lakehouse solutions, and data workflows using Microsoft Fabric, Azure Data Factory, and SSIS",
-            "Built advanced SQL queries, Power BI dashboards, and reporting solutions to support business decision-making",
-            "Developed FastAPI services and AI-powered BPM automations, improving operational efficiency and reducing processing times"
-        ]
+        description: {
+            en: [
+                "Designed and optimized ETL pipelines, Lakehouse solutions, and data workflows using Microsoft Fabric, Azure Data Factory, and SSIS",
+                "Built advanced SQL queries, Power BI dashboards, and reporting solutions to support business decision-making",
+                "Developed FastAPI services and AI-powered BPM automations, improving operational efficiency and reducing processing times"
+            ],
+            es: [
+                "Diseñé y optimicé pipelines ETL, soluciones Lakehouse y flujos de datos usando Microsoft Fabric, Azure Data Factory y SSIS",
+                "Construí consultas SQL avanzadas, dashboards en Power BI y soluciones de reportería para apoyar la toma de decisiones del negocio",
+                "Desarrollé servicios con FastAPI y automatizaciones BPM con IA, mejorando la eficiencia operativa y reduciendo tiempos de procesamiento"
+            ]
+        }
     },
     {
         date: "[2025]",
         active: false,
-        role: "Full Stack Developer",
+        role: { en: "Full Stack Developer", es: "Desarrollador Full Stack" },
         company: "@UTP AWS Academic Project",
-        description: [
-            "Designed and deployed a cloud-native full-stack application on AWS using a serverless architecture",
-            "Built scalable backend services with FastAPI and PostgreSQL, integrated with a modern Next.js frontend",
-            "Architected cloud infrastructure with Amplify, API Gateway, Lambda, and RDS following best practices"
-        ]
+        description: {
+            en: [
+                "Designed and deployed a cloud-native full-stack application on AWS using a serverless architecture",
+                "Built scalable backend services with FastAPI and PostgreSQL, integrated with a modern Next.js frontend",
+                "Architected cloud infrastructure with Amplify, API Gateway, Lambda, and RDS following best practices"
+            ],
+            es: [
+                "Diseñé y desplegué una aplicación full stack cloud-native en AWS con una arquitectura serverless",
+                "Construí servicios backend escalables con FastAPI y PostgreSQL, integrados con un frontend moderno en Next.js",
+                "Diseñé la infraestructura en la nube con Amplify, API Gateway, Lambda y RDS siguiendo buenas prácticas"
+            ]
+        }
     },
     {
         date: "[2022 - 2023]",
         active: false,
-        role: "Full Stack Developer",
+        role: { en: "Full Stack Developer", es: "Desarrollador Full Stack" },
         company: "@Reto Innova Banesco",
-        description: [
-            "Gathered requirements and designed software solutions for legal and financial process automation",
-            "Developed full-stack applications with Django REST Framework, React, and MySQL",
-            "Implemented role-based workflows, REST APIs, and automated document generation, earning 2nd place (2022) and 1st place (2023)"
-        ]
+        description: {
+            en: [
+                "Gathered requirements and designed software solutions for legal and financial process automation",
+                "Developed full-stack applications with Django REST Framework, React, and MySQL",
+                "Implemented role-based workflows, REST APIs, and automated document generation, earning 2nd place (2022) and 1st place (2023)"
+            ],
+            es: [
+                "Levanté requerimientos y diseñé soluciones de software para la automatización de procesos legales y financieros",
+                "Desarrollé aplicaciones full stack con Django REST Framework, React y MySQL",
+                "Implementé flujos por roles, APIs REST y generación automática de documentos, obteniendo el 2.º lugar (2022) y el 1.er lugar (2023)"
+            ]
+        }
     }
 ];
 
@@ -42,7 +71,7 @@ const experiences = [
 
 <section id="experience-section" class="mb-15">
     <div class="heading">
-        <Heading number={4} text="Experience Log" />
+        <Heading number={4} text={t('experience.title')} />
     </div>
     <div class="experiences-container pl-5">
         {
@@ -51,9 +80,10 @@ const experiences = [
                     <LogItem
                         date={experience.date}
                         active={experience.active}
-                        role={experience.role}
+                        role={experience.role[lang]}
                         company={experience.company}
-                        description={experience.description}
+                        description={experience.description[lang]}
+                        lang={lang}
                     />
                 </div>
             ))
@@ -65,9 +95,12 @@ const experiences = [
     .experiences-container {
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-rows: auto auto auto;
         gap: 48px;
         border-left: 2px solid var(--color-text-tertiary);
+    }
+    @media (min-width: 768px) {
+        .experiences-container { grid-template-rows: 1fr 1fr 1fr; }
     }
     .log-item {
         position: relative;

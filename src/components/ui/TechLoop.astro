@@ -57,7 +57,7 @@ const techs = [
 const allTechs = [...techs, ...techs];
 ---
 
-<div class="bg-loop rotate-3 overflow-hidden py-4">
+<div class="bg-loop rotate-3 overflow-hidden py-2.5 md:py-4">
   <div class="tech-track flex gap-12 items-center w-max">
     {allTechs.map((tech) => (
       <div class="tech-item flex items-center gap-3 shrink-0">
@@ -65,7 +65,7 @@ const allTechs = [...techs, ...techs];
           ? <tech.component class="text-text-primary w-8 h-8 block" />
           : null
         }
-        <span class="font-body text-text-primary text-sm font-medium whitespace-nowrap">{tech.name}</span>
+        <span class="hidden md:inline font-body text-text-primary text-sm font-medium whitespace-nowrap">{tech.name}</span>
       </div>
     ))}
   </div>

@@ -4,52 +4,69 @@ import HeroLoop from "@components/ui/TechLoop.astro";
 import GradientButton from "@components/ui/GradientButton.astro";
 import GlassButton from "@components/ui/GlassButton.astro";
 import heroPhoto from "@assets/images/hero.png";
+import { useTranslations, type Lang } from "@i18n/ui";
+
+interface Props {
+    lang: Lang;
+}
+
+const { lang } = Astro.props as Props;
+const t = useTranslations(lang);
+// El titulo en espanol es mas largo ("DE SOFTWARE"), asi que baja de tamano
+// "SOFT|WARE": en movil las dos mitades se separan para que la foto tape solo el centro
+const [title1a, title1b] = t('hero.title1').split("|");
+const titleSize = lang === "es"
+    ? "text-[10vw] sm:text-5xl lg:text-6xl xl:text-7xl"
+    : "text-[13vw] sm:text-7xl lg:text-8xl";
 
 const heroDesktop = await getImage({ src: heroPhoto });
 const heroMobile = await getImage({ src: heroPhoto, width: 768, format: "webp", quality: 85 });
 ---
 
-<section id="hero-section" class="h-screen w-screen grid grid-cols-10 grid-rows-[repeat(7,minmax(0,1fr))_repeat(2,minmax(0,0.5fr))] gap-2">
+<section id="hero-section" class="relative w-full flex flex-col pt-[9.5rem] md:pt-0 md:h-screen md:w-screen md:grid md:grid-cols-10 md:grid-rows-[repeat(7,minmax(0,1fr))_repeat(2,minmax(0,0.5fr))] md:gap-2">
     <div class="contents">
-        <div class="w-full space-y-4 contents">
-            <h3 class="font-body text-text-primary font-light text-2xl sm:text-3xl lg:text-5xl col-start-2 col-end-5 row-start-3 flex items-end h-full gap-2">
-                Hi, <span class="text-accent">Samuel</span> here
+        <div class="contents">
+            <h3 class="order-4 mt-8 px-4 sm:px-6 md:m-0 md:p-0 md:order-none font-body text-text-primary font-light text-2xl sm:text-3xl lg:text-5xl flex items-end justify-center gap-2 md:justify-start md:col-start-2 md:col-end-5 md:row-start-3 md:h-full">
+                {t('hero.greeting')} <span class="text-accent">Samuel</span> {t('hero.greetingEnd')}
             </h3>
 
-            <h2 class="font-body hero-title-gradient font-extrabold tracking-tighter text-5xl sm:text-7xl lg:text-8xl z-5 col-start-2 col-end-7 row-start-4 row-span-1">
-                SOFTWARE
+            <h2 aria-label={title1a + title1b} class:list={["order-1 px-4 sm:px-6 md:p-0 md:order-none font-body hero-title-gradient font-extrabold tracking-tighter leading-[1.05] md:leading-none z-0 md:z-5 md:col-start-2 md:col-end-7 md:row-start-4 md:row-span-1", titleSize]}>
+                <span class="flex justify-start gap-[0.7em] md:block"><span>{title1a}</span><span>{title1b}</span></span>
             </h2>
-            <h2 class="font-body hero-title-gradient font-extrabold tracking-tighter text-5xl sm:text-7xl lg:text-8xl z-20 col-start-2 col-end-7 row-start-5 row-span-1">
-                ENGINEER <span class="text-accent cursor-blink">|</span>
+            <h2 class:list={["order-2 px-4 sm:px-6 md:p-0 md:order-none font-body hero-title-gradient font-extrabold tracking-tighter leading-[1.05] md:leading-none z-20 md:col-start-2 md:col-end-7 md:row-start-5 md:row-span-1", titleSize]}>
+                {t('hero.title2')} <span class="text-accent cursor-blink">|</span>
             </h2>
-            
-            <p class="font-body text-text-secondary h-full font-light text-lg sm:text-xl lg:text-2xl z-20 col-start-2 col-end-8 row-start-6 flex items-end">
-                Software engineer passionate about building solutions.
-                <br>
-                I work with APIs, data and web technologies to design, optimize and scale systems.
+
+            <p class="order-5 mt-4 px-4 sm:px-6 md:m-0 md:p-0 md:order-none text-center md:text-left font-body text-text-secondary font-light text-base sm:text-xl lg:text-2xl z-20 flex items-end justify-center md:justify-start md:h-full md:col-start-2 md:col-end-8 md:row-start-6">
+                <span>
+                    {t('hero.subtitle1')}
+                    <br>
+                    {t('hero.subtitle2')}
+                </span>
             </p>
 
-            <div class="flex flex-wrap items-center justify-center gap-4 z-20 col-start-4 col-end-8 row-start-7">
-                <GradientButton text="View Projects" link="#projects-section" target="_current" />
-                <GlassButton text="Resume.pdf" link="/resume.pdf" target="_blank" />
+            <div class="order-6 mt-8 mb-14 px-4 sm:px-6 md:m-0 md:p-0 md:order-none flex flex-wrap items-center justify-center gap-4 z-20 md:col-start-4 md:col-end-8 md:row-start-7">
+                <GradientButton text={t('hero.viewProjects')} link="#projects-section" target="_current" />
+                <GlassButton text={t('hero.resume')} link="/resume.pdf" target="_blank" />
             </div>
         </div>
     </div>
 
-    <div class="pointer-events-none col-start-5 col-end-11 row-start-2 row-end-9">
+    <div class="pointer-events-none absolute z-10 inset-x-0 mx-auto top-[5.4rem] h-[15rem] w-[min(75%,24rem)] md:z-auto md:mx-0 md:w-auto md:static md:h-auto md:col-start-5 md:col-end-11 md:row-start-2 md:row-end-9">
         <picture>
             <source media="(max-width: 768px)" srcset={heroMobile.src} type="image/webp" />
             <img
                 src={heroDesktop.src}
-                alt="Portrait of Samuel Castro"
+                alt={t('hero.photoAlt')}
                 loading="eager"
                 fetchpriority="high"
-                class="w-auto h-full object-cover object-left"
+                class="w-full h-full object-cover object-[30%_top] md:w-auto md:object-left"
             />
         </picture>
+        <div class="absolute inset-x-0 bottom-0 h-1/5 bg-gradient-to-t from-bg/40 to-transparent md:hidden"></div>
     </div>
 
-    <div class="col-span-full row-start-8 row-end-9">
+    <div class="order-3 mt-[3.7rem] relative z-20 col-span-full md:z-auto md:static md:m-0 md:order-none md:row-start-8 md:row-end-9">
         <HeroLoop />
     </div>
 </section>
