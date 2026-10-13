@@ -12,20 +12,54 @@ const t = useTranslations(lang);
 
 const experiences = [
     {
-        date: `[2024.09 - ${t('experience.present')}]`,
+        date: `[2026.09 - ${t('experience.present')}]`,
         active: true,
-        role: { en: "BI Programmer & Data Analyst", es: "Programador BI y Analista de Datos" },
+        role: { en: "Data Engineer", es: "Ingeniero de Datos" },
         company: "@Banco Delta",
         description: {
             en: [
-                "Designed and optimized ETL pipelines, Lakehouse solutions, and data workflows using Microsoft Fabric, Azure Data Factory, and SSIS",
-                "Built advanced SQL queries, Power BI dashboards, and reporting solutions to support business decision-making",
-                "Developed FastAPI services and AI-powered BPM automations, improving operational efficiency and reducing processing times"
+                "Designed and built a Microsoft Fabric lakehouse with a star schema that centralizes data from the bank's source systems (OnBase, Bantotal and Payme), including pipelines, Dataflows Gen2 and notebooks",
+                "Replaced QlikView and the Azure warehouse with the lakehouse and Power BI, rebuilding most core dashboards with the same analytics and more information, cutting costs and improving refresh times",
+                "Built the Payme integration and an automated Fabric notebook that computes and stores the daily delinquency behavior score of the active loan portfolio; now building a probability-of-default model on top of it",
+                "Built a Balanced Scorecard dashboard to track execution, goals and commissions for sales and collections staff"
             ],
             es: [
-                "Diseñé y optimicé pipelines ETL, soluciones Lakehouse y flujos de datos usando Microsoft Fabric, Azure Data Factory y SSIS",
-                "Construí consultas SQL avanzadas, dashboards en Power BI y soluciones de reportería para apoyar la toma de decisiones del negocio",
-                "Desarrollé servicios con FastAPI y automatizaciones BPM con IA, mejorando la eficiencia operativa y reduciendo tiempos de procesamiento"
+                "Diseñé y construí un lakehouse en Microsoft Fabric con modelo estrella que centraliza los datos de los sistemas fuente del banco (OnBase, Bantotal y Payme), incluyendo pipelines, Dataflows Gen2 y notebooks",
+                "Reemplacé QlikView y el warehouse en Azure por el lakehouse y Power BI, reconstruyendo la mayoría de los tableros centrales con la misma analítica y más información, reduciendo costos y mejorando los tiempos de actualización",
+                "Creé la integración con Payme y un notebook automático en Fabric que calcula y almacena diariamente el score de comportamiento de mora de la cartera activa de préstamos; actualmente construyo un modelo de probabilidad de incumplimiento sobre él",
+                "Construí un tablero de Balanced Scorecard para el seguimiento de ejecución, metas y comisiones de vendedores y cobradores"
+            ]
+        }
+    },
+    {
+        date: `[2026.07 - ${t('experience.present')}]`,
+        active: true,
+        role: { en: "SQL Instructor (part-time)", es: "Profesor de SQL (tiempo parcial)" },
+        company: "@iacademy",
+        description: {
+            en: [
+                "Teach the basic SQL course through recorded and live synchronous classes"
+            ],
+            es: [
+                "Facilito el curso de SQL básico mediante clases grabadas y sincrónicas"
+            ]
+        }
+    },
+    {
+        date: "[2024.09 - 2026.08]",
+        active: false,
+        role: { en: "Programmer Analyst / Data Analyst", es: "Analista Programador / Analista de Datos" },
+        company: "@Banco Delta",
+        description: {
+            en: [
+                "Implemented a FastAPI service and BPM workflow automation with generative AI (GPT), cutting workflow instance lifetime by 50% and meeting regulatory deadlines",
+                "Built advanced SQL queries and reporting in Power BI, Reporting Services and QlikView; optimized complex queries and data flows",
+                "Created and maintained ETL in Fabric Pipelines, Integration Services and Data Factory, with monitoring dashboards that ensure data availability"
+            ],
+            es: [
+                "Implementé una API con FastAPI y automaticé flujos BPM con IA generativa (GPT), reduciendo en un 50% el tiempo de vida de las instancias del flujo y cumpliendo los tiempos regulatorios",
+                "Construí consultas SQL avanzadas y reportería en Power BI, Reporting Services y QlikView; optimicé consultas y flujos de datos complejos",
+                "Creé y mantuve ETL en Fabric Pipelines, Integration Services y Data Factory, con dashboards de monitoreo que aseguran la disponibilidad de los datos"
             ]
         }
     },
@@ -54,14 +88,16 @@ const experiences = [
         company: "@Reto Innova Banesco",
         description: {
             en: [
-                "Gathered requirements and designed software solutions for legal and financial process automation",
-                "Developed full-stack applications with Django REST Framework, React, and MySQL",
-                "Implemented role-based workflows, REST APIs, and automated document generation, earning 2nd place (2022) and 1st place (2023)"
+                "Earned 2nd place (2022) and 1st place (2023) in the hackathon",
+                "Designed and implemented a full-stack architecture with Django REST Framework and React, with RESTful APIs and custom authorization middleware",
+                "Modeled and optimized the MySQL database for complex legal and financial case management",
+                "Automated 80% of manual processes, including Word legal documents and email notifications, with multi-role workflows and custom dashboards"
             ],
             es: [
-                "Levanté requerimientos y diseñé soluciones de software para la automatización de procesos legales y financieros",
-                "Desarrollé aplicaciones full stack con Django REST Framework, React y MySQL",
-                "Implementé flujos por roles, APIs REST y generación automática de documentos, obteniendo el 2.º lugar (2022) y el 1.er lugar (2023)"
+                "Obtuve el 2.º lugar (2022) y el 1.er lugar (2023) en el hackathon",
+                "Diseñé e implementé una arquitectura full stack con Django REST Framework y React, con APIs RESTful y middleware de autorización personalizado",
+                "Modelé y optimicé la base de datos MySQL para la gestión de casos legales y financieros complejos",
+                "Automaticé el 80% de los procesos manuales, incluyendo documentos legales en Word y notificaciones por email, con workflows multi-rol y dashboards personalizados"
             ]
         }
     }
@@ -76,7 +112,7 @@ const experiences = [
     <div class="experiences-container pl-5">
         {
             experiences.map((experience, index) => (
-                <div class={`log-item ${experience.active ? 'log-item-active' : ''} exp${index + 1}`}>
+                <div class={`log-item ${experience.active ? 'log-item-active' : ''}`}>
                     <LogItem
                         date={experience.date}
                         active={experience.active}
@@ -95,12 +131,9 @@ const experiences = [
     .experiences-container {
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: auto auto auto;
+        grid-auto-rows: auto;
         gap: 48px;
         border-left: 2px solid var(--color-text-tertiary);
-    }
-    @media (min-width: 768px) {
-        .experiences-container { grid-template-rows: 1fr 1fr 1fr; }
     }
     .log-item {
         position: relative;
@@ -143,7 +176,4 @@ const experiences = [
             0 0 56px rgba(192, 193, 255, 0.6);
     }
 
-    .exp1 { grid-area: 1 / 1 / 2 / 2; }
-    .exp2 { grid-area: 2 / 1 / 3 / 2; }
-    .exp3 { grid-area: 3 / 1 / 4 / 2; }
 </style>
