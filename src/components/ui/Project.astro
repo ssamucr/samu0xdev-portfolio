@@ -32,11 +32,11 @@ const t = useTranslations(lang);
         </ul>
     </div>
     <div class="div4 z-20 p-3 flex items-center justify-center gap-6">
-        <a href={githubUrl} target="_blank" class="text-text-primary hover:underline hover:scale-110 transition-transform duration-300"><GithubIcon class="w-5 h-5"/></a>
-        <a href={projectUrl} target="_blank" class="text-text-primary hover:underline hover:scale-110 transition-transform duration-300"><OpenLinkIcon class="w-5 h-5"/></a>
+        <a href={githubUrl} target="_blank" rel="noopener noreferrer" aria-label={`${t('projects.code')} ${title}`} class="text-text-primary hover:underline hover:scale-110 transition-transform duration-300"><GithubIcon class="w-5 h-5"/></a>
+        {projectUrl && <a href={projectUrl} target="_blank" rel="noopener noreferrer" aria-label={`${t('projects.demo')} ${title}`} class="text-text-primary hover:underline hover:scale-110 transition-transform duration-300"><OpenLinkIcon class="w-5 h-5"/></a>}
     </div>
     <a
-        href={projectUrl}
+        href={projectUrl ?? githubUrl}
         target="_blank"
         rel="noreferrer noopener"
         aria-label={`${t('projects.viewProject')} ${title}`}

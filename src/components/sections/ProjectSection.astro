@@ -2,6 +2,11 @@
 import Heading from "@components/ui/Heading.astro";
 import Project from "@components/ui/Project.astro";
 import templateImg from "@assets/images/projects/template.webp";
+import ecoImg from "@assets/images/projects/eco.webp";
+import covidImg from "@assets/images/projects/covid.webp";
+import alasImg from "@assets/images/projects/alas.webp";
+import sismosImg from "@assets/images/projects/sismos.webp";
+import focusTimerImg from "@assets/images/projects/focus-timer.webp";
 import { useTranslations, type Lang } from "@i18n/ui";
 
 interface Props {
@@ -13,70 +18,69 @@ const t = useTranslations(lang);
 
 const projects = [
     {
-        title: "Finance Tracker",
+        title: "Eco",
         description: {
-            en: "A web application to track personal finances and manage budgets. Users can categorize expenses, set budget goals, and visualize spending patterns.",
-            es: "Una aplicación web para llevar el control de finanzas personales y presupuestos. Permite categorizar gastos, definir metas de ahorro y visualizar patrones de gasto."
+            en: "Personal finance app: accounts, cards, transactions, debts, recurring plans and installments, with analytics exportable to Excel and PDF.",
+            es: "App de finanzas personales: cuentas, tarjetas, movimientos, deudas, planes recurrentes y cuotas, con analítica exportable a Excel y PDF."
         },
-        techStack: ["React", "TypeScript", "Tailwind CSS"],
-        imageUrl: templateImg,
-        projectUrl: "https://project.com",
-        githubUrl: "https://github.com/project"
+        techStack: ["React", "FastAPI", "PostgreSQL", "Supabase"],
+        imageUrl: ecoImg,
+        projectUrl: "https://eco-app-sooty.vercel.app",
+        githubUrl: "https://github.com/ssamucr/eco-app-frontend"
     },
     {
-        title: "E-commerce Platform",
+        title: "COVID-19 Dashboard",
         description: {
-            en: "A full-featured e-commerce platform that allows users to browse products, add items to a shopping cart, and securely checkout using Stripe.",
-            es: "Una plataforma de comercio electrónico completa donde los usuarios exploran productos, agregan artículos al carrito y pagan de forma segura con Stripe."
+            en: "Interactive dashboard on the spread of COVID-19: global totals, per-country charts and a vaccination map, built on Our World in Data.",
+            es: "Dashboard interactivo sobre la propagación del COVID-19: totales globales, gráficas por país y un mapa de vacunación, sobre datos de Our World in Data."
         },
-        techStack: ["Next.js", "Node.js", "MongoDB"],
-        imageUrl: templateImg,
-        projectUrl: "https://project.com",
-        githubUrl: "https://github.com/project"
+        techStack: ["Python", "Dash", "Plotly", "Pandas"],
+        imageUrl: covidImg,
+        projectUrl: "https://covid-dashboard-6ejn.onrender.com",
+        githubUrl: "https://github.com/ssamucr/covid_data_analysis_visualization"
     },
     {
-        title: "Social Media Dashboard",
+        title: "Alas Catalog",
         description: {
-            en: "A dashboard for social media analytics that aggregates data from multiple platforms and provides insights through interactive charts and graphs.",
-            es: "Un panel de analítica de redes sociales que agrega datos de múltiples plataformas y ofrece información mediante gráficos interactivos."
+            en: "Fine jewelry catalog with category filters, fuzzy search and WhatsApp contact. The inventory updates straight from an Excel sheet.",
+            es: "Catálogo de joyería fina con filtros por categoría, búsqueda difusa y contacto por WhatsApp. El inventario se actualiza desde una hoja de Excel."
         },
-        techStack: ["Vue.js", "Django", "PostgreSQL"],
-        imageUrl: templateImg,
-        projectUrl: "https://project.com",
-        githubUrl: "https://github.com/project"
+        techStack: ["Astro", "Tailwind CSS", "Python"],
+        imageUrl: alasImg,
+        projectUrl: "https://alas-catalog.vercel.app",
+        githubUrl: "https://github.com/ssamucr/alas-catalog"
     },
     {
-        title: "Task Management App",
+        title: "Sismos de Panamá",
         description: {
-            en: "A task management application that helps users organize their to-do lists, set reminders, and collaborate with team members in real-time.",
-            es: "Una aplicación de gestión de tareas que ayuda a organizar listas de pendientes, definir recordatorios y colaborar con el equipo en tiempo real."
+            en: "Live dashboard of an earthquake sequence in Panama: interactive map, magnitude chart and event list, fed by the USGS API.",
+            es: "Panel en vivo de una secuencia sísmica en Panamá: mapa interactivo, gráfica de magnitudes y lista de eventos, con datos de la API de USGS."
         },
-        techStack: ["Angular", "Firebase", "Bootstrap"],
-        imageUrl: templateImg,
-        projectUrl: "https://project.com",
-        githubUrl: "https://github.com/project"
+        techStack: ["JavaScript", "D3.js", "USGS API"],
+        imageUrl: sismosImg,
+        projectUrl: "https://sismos-panama.vercel.app",
+        githubUrl: "https://github.com/ssamucr/sismos-panama"
     },
     {
-        title: "Personal Blog",
+        title: "Focus Timer",
         description: {
-            en: "A personal blogging platform that allows users to create and publish blog posts, customize their themes, and engage with readers through comments.",
-            es: "Una plataforma de blogs personales para crear y publicar entradas, personalizar temas e interactuar con los lectores mediante comentarios."
+            en: "Minimal dark countdown timer with an animated background.",
+            es: "Temporizador de cuenta regresiva minimalista, en modo oscuro y con fondo animado."
         },
-        techStack: ["Gatsby", "GraphQL", "Contentful"],
-        imageUrl: templateImg,
-        projectUrl: "https://project.com",
-        githubUrl: "https://github.com/project"
+        techStack: ["React", "TypeScript", "Vite"],
+        imageUrl: focusTimerImg,
+        projectUrl: "https://focus-timer-peach-nine.vercel.app",
+        githubUrl: "https://github.com/ssamucr/focus-timer"
     },
     {
-        title: "Fitness Tracker",
+        title: "Apartment Manager",
         description: {
-            en: "A fitness tracking application that enables users to log workouts, set fitness goals, and track progress over time with visual analytics.",
-            es: "Una aplicación de fitness que permite registrar entrenamientos, definir metas y seguir el progreso con analíticas visuales."
+            en: "Rental apartment management: create, edit, list and delete listings through a REST API on AWS.",
+            es: "Gestión de apartamentos en alquiler: crea, edita, lista y elimina registros a través de una API REST en AWS."
         },
-        techStack: ["Svelte", "Go", "MySQL"],
+        techStack: ["React", "TypeScript", "AWS"],
         imageUrl: templateImg,
-        projectUrl: "https://project.com",
-        githubUrl: "https://github.com/project"
+        githubUrl: "https://github.com/ssamucr/rent-crud-aws"
     }
 ];
 ---

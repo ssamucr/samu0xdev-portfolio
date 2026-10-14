@@ -5,6 +5,7 @@ export interface Project {
     description: string;
     techStack: string[];
     imageUrl: ImageMetadata;
-    projectUrl: string;
+    /** Demo en vivo. Si falta, la tarjeta solo enlaza al repositorio. */
+    projectUrl?: string;
     githubUrl: string;
 }
