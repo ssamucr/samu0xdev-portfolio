@@ -1,12 +1,12 @@
 ---
 import Heading from "@components/ui/Heading.astro";
 import Project from "@components/ui/Project.astro";
-import templateImg from "@assets/images/projects/template.webp";
 import ecoImg from "@assets/images/projects/eco.webp";
 import covidImg from "@assets/images/projects/covid.webp";
 import alasImg from "@assets/images/projects/alas.webp";
 import sismosImg from "@assets/images/projects/sismos.webp";
 import focusTimerImg from "@assets/images/projects/focus-timer.webp";
+import particlePortraitImg from "@assets/images/projects/particle-portrait.webp";
 import { useTranslations, type Lang } from "@i18n/ui";
 
 interface Props {
@@ -73,14 +73,15 @@ const projects = [
         githubUrl: "https://github.com/ssamucr/focus-timer"
     },
     {
-        title: "Apartment Manager",
+        title: "Particle Portrait",
         description: {
-            en: "Rental apartment management: create, edit, list and delete listings through a REST API on AWS.",
-            es: "Gestión de apartamentos en alquiler: crea, edita, lista y elimina registros a través de una API REST en AWS."
+            en: "Interactive portrait made of thousands of lines that form from text and react to the mouse with a glitch effect. Adjustable in real time.",
+            es: "Retrato interactivo hecho de miles de líneas que se forman desde un texto y reaccionan al ratón con un efecto glitch. Ajustable en tiempo real."
         },
-        techStack: ["React", "TypeScript", "AWS"],
-        imageUrl: templateImg,
-        githubUrl: "https://github.com/ssamucr/rent-crud-aws"
+        techStack: ["JavaScript", "Canvas", "CSS"],
+        imageUrl: particlePortraitImg,
+        projectUrl: "https://particle-portrait.vercel.app",
+        githubUrl: "https://github.com/ssamucr/Draw-Test"
     }
 ];
 ---
